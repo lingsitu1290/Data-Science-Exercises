@@ -32,12 +32,10 @@ df['Alcohol'] = df['Alcohol'].astype(float)
 df['Tobacco'] = df['Tobacco'].astype(float)
 
 #print the statements
-print "The mean for the Alcohol and Tobacco dataset is: ", df['Alcohol'].mean(), df['Tobacco'].mean()
-print "The median for the Alcohol and Tobacco dataset is: ", df['Alcohol'].median(), df['Tobacco'].median()
-print "The mode for the Alcohol and Tobacco dataset is: ", stats.mode(df['Alcohol']), stats.mode(df['Tobacco']) #why isn't the mode printing out?
+print "Mean: ", df['Alcohol'].mean(), df['Tobacco'].mean()
+print "Median: ", df['Alcohol'].median(), df['Tobacco'].median()
+print "Mode: ", stats.mode(df['Alcohol']), stats.mode(df['Tobacco']) #why isn't the mode printing out?
 #ModeResult(mode=array([ 4.02]), count=array([1])) ModeResult(mode=array([ 2.71]), count=array([1]))
-
-
-print "The range for the Alcohol and Tobacco dataset is: ", max(df['Alcohol']) - min(df['Alcohol']), max(df['Tobacco']) - min(df['Tobacco'])
-print "The variance for the Alcohol and Tobacco dataset is: ", df['Alcohol'].var(), df['Tobacco'].var()
-print "The standard deviation for the Alcohol and Tobacco dataset is: ", df['Alcohol'].std(), df['Tobacco'].std()
+print "Range: ", max(df['Alcohol']) - min(df['Alcohol']), max(df['Tobacco']) - min(df['Tobacco'])
+print "Variance: ", df['Alcohol'].var(), df['Tobacco'].var()
+print "Standard deviation: ", df['Alcohol'].std(), df['Tobacco'].std()
