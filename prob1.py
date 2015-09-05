@@ -18,15 +18,15 @@ for k,v in c.iteritems():
 
 
 #create boxplot
-''' plt.boxplot(testlist)
+plt.boxplot(testlist)
 plt.savefig("boxplot.png")
-'''
+
 
 #create histogram
-''' plt.hist(testlist, histtype='bar')
+plt.hist(testlist, histtype='bar')
 plt.savefig("histogram.png")
 plt.show()
-'''
+
 
 #create qq plot
 plt.figure()
