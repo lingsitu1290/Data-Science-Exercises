@@ -18,15 +18,19 @@ for k,v in c.iteritems():
 
 
 #create boxplot
-plt.boxplot(testlist)
+''' plt.boxplot(testlist)
 plt.savefig("boxplot.png")
+'''
 
 #create histogram
-plt.hist(testlist, histtype='bar')
+''' plt.hist(testlist, histtype='bar')
 plt.savefig("histogram.png")
+plt.show()
+'''
 
 #create qq plot
 plt.figure()
 test_data2 = np.random.uniform(size=1000)   
 graph2 = stats.probplot(testlist, dist="norm", plot=plt)
 plt.savefig("qqplot.png") 
+plt.show()
