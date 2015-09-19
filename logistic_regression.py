@@ -31,10 +31,10 @@ def logistic_function(FICOScore, LoanAmount):
     LoanAmt_coeff = coeff[1]
     intercept = coeff[2]
     #print logistic function 
-    p = 1/(1 + math.exp(-1*(intercept + FICO_coeff*FICOScore + LoanAmt_coeff*LoanAmount))
+    p = 1/(1 + math.exp(-1*(intercept + FICO_coeff*FICOScore + LoanAmt_coeff*LoanAmount)))
     print p
 
-logistic_function(300, 10000)
+logistic_function(720, 10000) # why does it output one?
 
     
 
