@@ -30,7 +30,7 @@ def logistic_function(FICOScore, LoanAmount):
     FICO_coeff = coeff[1]
     LoanAmt_coeff = coeff[2]
     intercept = coeff[0]
-    #print logistic function 
+    ##print logistic function 
     p = 1/(1 + math.exp(intercept + FICO_coeff*FICOScore + LoanAmt_coeff*LoanAmount))
     print p
 
