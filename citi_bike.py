@@ -37,6 +37,9 @@ with con:
 station_ids = df['id'].tolist() 
 station_ids = ['_' + str(x) + ' INT' for x in station_ids] 
 
+
+##################can we see the database at this point? It'll create a column callled execution_time and the _station ID INT?
+#creating the table (top title column names)
 with con:
         cur.execute("CREATE TABLE available_bikes ( execution_time INT, " +  ", ".join(station_ids) + ");")
 
@@ -54,22 +57,28 @@ for i in range(60):
     cur.execute('INSERT INTO available_bikes (execution_time) VALUES (?)', (exec_time.strftime('%s'),))
     con.commit()
 
+###################What does the default dict do? And where does int come from? THe default is set to integers?
+#So this is making a dictionary named id_bikes with default set to integers?
+# And then loop through station id to put into available bikes?
     id_bikes = collections.defaultdict(int)
     for station in r.json()['stationBeanList']:
         id_bikes[station['id']] = station['availableBikes']
 
+###################After we get a dictionary from above, loop through the dictionary to
+#update the availables bikes to gather the time 
     for k, v in id_bikes.iteritems():
         cur.execute("UPDATE available_bikes SET _" + str(k) + " = " + str(v) + " WHERE execution_time = " + exec_time.strftime('%s') + ";")
     con.commit()
 
-    time.sleep(60)
-#What's the point of putting the time in the program?
+    time.sleep(60) #stop for 60 secs. 
 
 #____________________________________________________________
 #Analysizing Results
-
+###################what does the con mean?
 df = pd.read_sql_query("SELECT * FROM available_bikes ORDER BY execution_time",con,index_col='execution_time')
 
+#Creating a default dictionary called hour_change 
+#############################
 hour_change = collections.defaultdict(int)
 for col in df.columns:
     station_vals = df[col].tolist()
@@ -91,8 +100,8 @@ def keywithmaxval(d):
 # assign the max key to max_station
 max_station = keywithmaxval(hour_change)
 
-#query sqlite for reference information
-cur.execute("SELECT id, stationname, latitude, longitude FROM citibike_reference WHERE id = ?", (max_station,))
+#get information from reference table from max value that we found from available bikes table 
+cur.execute("SELECT id, stationname, latitude, longitude FROM citibike_reference WHERE id = ?", (max_station))
 data = cur.fetchone()
 print "The most active station is station id %s at %s latitude: %s longitude: %s " % data
 print "With " + str(hour_change[379]) + " bicycles coming and going in the hour between " + datetime.datetime.fromtimestamp(int(df.index[0])).strftime('%Y-%m-%dT%H:%M:%S') + " and " + datetime.datetime.fromtimestamp(int(df.index[-1])).strftime('%Y-%m-%dT%H:%M:%S')
